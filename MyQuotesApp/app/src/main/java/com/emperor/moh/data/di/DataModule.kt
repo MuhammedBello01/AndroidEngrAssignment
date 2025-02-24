@@ -1,6 +1,7 @@
 package com.emperor.moh.data.di
 
 import android.content.Context
+import android.os.Build
 import androidx.work.WorkManager
 import com.emperor.moh.data.local.QuoteDao
 import com.emperor.moh.data.local.QuoteDatabase
@@ -12,8 +13,11 @@ import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
+import okhttp3.ConnectionSpec
+import okhttp3.OkHttpClient
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
+import java.util.concurrent.TimeUnit
 import javax.inject.Singleton
 
 
@@ -21,10 +25,15 @@ import javax.inject.Singleton
 @Module
 object DataModule {
 
+    private val okHttpClient: OkHttpClient = OkHttpClient.Builder()
+        .connectionSpecs(listOf(ConnectionSpec.MODERN_TLS)) // Enforces TLS 1.2+
+        .build()
+
     @Provides
     fun provideRetrofit(): Retrofit {
         return Retrofit.Builder()
             .baseUrl("https://dummyjson.com/")
+            .client(okHttpClient)
             .addConverterFactory(GsonConverterFactory.create())
             .build()
     }
@@ -55,4 +64,24 @@ object DataModule {
     fun provideQuoteRepository(workManager: WorkManager, quoteDao: QuoteDao): QuoteRepository {
         return QuoteRepositoryImpl(workManager, quoteDao)
     }
+
+    @Provides
+    @Singleton
+    fun provideOkHttpClient(okHttpClient: OkHttpClient.Builder): OkHttpClient.Builder {
+        return okHttpClient
+            .connectTimeout(30, TimeUnit.SECONDS)
+            .readTimeout(30, TimeUnit.SECONDS)
+            .writeTimeout(30, TimeUnit.SECONDS)
+            .apply {
+                addInterceptor{ chain ->
+                    val request = chain.request()
+                    val url = request.url()
+                    if (!url.isHttps){
+                        throw IllegalStateException("Only Https connections are allowed")
+                    }
+                    chain.proceed(request)
+                }
+            }
+    }
+
 }
