@@ -2,6 +2,7 @@ package com.emperormoh.androidengrassignment.presentation
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -15,6 +16,7 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.layout.wrapContentHeight
+import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.rememberScrollState
@@ -23,12 +25,14 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Add
+import androidx.compose.material.icons.filled.ArrowBackIosNew
 import androidx.compose.material.icons.filled.ArrowDownward
 import androidx.compose.material.icons.filled.ArrowUpward
 import androidx.compose.material.icons.filled.Calculate
 import androidx.compose.material.icons.filled.FilterList
 import androidx.compose.material.icons.filled.History
 import androidx.compose.material.icons.filled.Home
+import androidx.compose.material.icons.filled.Inventory2
 import androidx.compose.material.icons.filled.KeyboardArrowDown
 import androidx.compose.material.icons.filled.LocalShipping
 import androidx.compose.material.icons.filled.LocationOn
@@ -39,6 +43,7 @@ import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.Icon
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.NavigationBar
 import androidx.compose.material3.NavigationBarItem
 import androidx.compose.material3.OutlinedTextField
@@ -99,29 +104,61 @@ fun HomeScreen(navController: NavController){
 //    }
     Box( modifier = Modifier.fillMaxSize()){
         Column(
-            modifier = Modifier.fillMaxSize()
+            modifier = Modifier
+                .fillMaxSize()
                 .background(Color(0xFFF7F7F8))
         ){
             // Top Header with gradient background
             TopHeader(
                 searchText = searchText,
-                onSearchTextChange = { searchText = it}
+                onSearchTextChange = { searchText = it},
+                onClearSearchClick = { searchText = "" }
             )
-            // Main Content
-            Column(
-                modifier = Modifier
-                    .fillMaxSize()
-                    .verticalScroll(rememberScrollState())
-                    .padding(horizontal = 20.dp)
-            ) {
-                Spacer(modifier = Modifier.height(24.dp))
-                // Tracking Section
-                TrackingSection()
-                Spacer(modifier = Modifier.height(32.dp))
-                // Available Vehicles Section
-                AvailableVehiclesSection2()
-                Spacer(modifier = Modifier.height(200.dp)) // Space for bottom nav
+
+            if (searchText.isNotBlank()){
+                Box(
+                    modifier = Modifier
+                        .fillMaxSize()
+                        .padding(horizontal = 12.dp, vertical = 8.dp)
+                        .clip(RoundedCornerShape(16.dp))
+                        .background(Color(0xFFF7F7F8))
+                ) {
+                    LazyColumn(
+                        modifier = Modifier
+                            .fillMaxSize()
+                            .background(Color.White)
+                            .padding(12.dp)
+                    ) {
+                        items(sampleShipmentsSearch) { shipment ->
+                            ShipmentSearchItem(shipment)
+                            HorizontalDivider(
+                                modifier = Modifier
+                                    .fillMaxWidth()
+                                    .height(1.dp),
+                                color = Color.Gray.copy(alpha = 0.2f)
+                            )
+                        }
+                    }
+                }
+
+            }else{
+                // Main Content
+                Column(
+                    modifier = Modifier
+                        .fillMaxSize()
+                        .verticalScroll(rememberScrollState())
+                        .padding(horizontal = 20.dp)
+                ) {
+                    Spacer(modifier = Modifier.height(24.dp))
+                    // Tracking Section
+                    TrackingSection()
+                    Spacer(modifier = Modifier.height(32.dp))
+                    // Available Vehicles Section
+                    AvailableVehiclesSection2()
+                    Spacer(modifier = Modifier.height(200.dp)) // Space for bottom nav
+                }
             }
+
         }
         BottomNavBar(
             modifier = Modifier
@@ -441,7 +478,8 @@ fun VehicleCard2(
                 Spacer(modifier = Modifier.height(5.dp))
             }
             Box(
-                modifier = Modifier.align(alignment = Alignment.End)
+                modifier = Modifier
+                    .align(alignment = Alignment.End)
                     .fillMaxWidth()
                     .padding(bottom = 10.dp)
                     .background(Color(0xFFF5F5F5), RoundedCornerShape(8.dp)),
@@ -490,7 +528,10 @@ fun BottomNavBar(
                                     modifier = Modifier
                                         .height(3.dp)
                                         .width(50.dp)
-                                        .background(Color(0xFF7C4DFF), shape = RoundedCornerShape(1.5.dp))
+                                        .background(
+                                            Color(0xFF7C4DFF),
+                                            shape = RoundedCornerShape(1.5.dp)
+                                        )
                                 )
                                 Spacer(modifier = Modifier.height(4.dp))
                             }
@@ -517,7 +558,8 @@ fun BottomNavBar(
 @Composable
 fun TopHeader(
     searchText: String,
-    onSearchTextChange: (String) -> Unit
+    onSearchTextChange: (String) -> Unit,
+    onClearSearchClick: () -> Unit = {}
 ) {
     Box(
         modifier = Modifier
@@ -606,12 +648,11 @@ fun TopHeader(
             Spacer(modifier = Modifier.height(20.dp))
             SearchBar(
                 searchText = searchText,
-                onSearchTextChange = onSearchTextChange
+                onSearchTextChange = onSearchTextChange,
+                onClearSearchClick = onClearSearchClick
             )
             Spacer(modifier = Modifier.height(20.dp))
         }
-
-
     }
 }
 
@@ -619,60 +660,108 @@ fun TopHeader(
 fun SearchBar(
     modifier: Modifier = Modifier,
     searchText: String,
-    onSearchTextChange: (String) -> Unit
+    onSearchTextChange: (String) -> Unit,
+    onClearSearchClick: () -> Unit = {}
 ) {
-    Box(
-        modifier = modifier
-            .fillMaxWidth()
-            //.offset(y = (-30).dp)
-            .padding(horizontal = 20.dp)
+    Row(
+        verticalAlignment = Alignment.CenterVertically
     ) {
-        OutlinedTextField(
-            value = searchText,
-            onValueChange = onSearchTextChange,
-            placeholder = {
-                Text(
-                    text = "Enter the receipt number ...",
-                    color = Color.Gray
-                )
-            },
-            leadingIcon = {
-                Icon(
-                    imageVector = Icons.Default.Search,
-                    contentDescription = "Search",
-                    tint = Color.Gray
-                )
-            },
-            trailingIcon = {
-                Box(
-                    modifier = modifier
-                        .size(40.dp)
-                        .clip(CircleShape)
-                        .background(Color(0xFFFF8A65)),
-                    contentAlignment = Alignment.Center
-                ) {
-                    Icon(
-                        imageVector = Icons.Default.FilterList,
-                        contentDescription = "Filter",
-                        tint = Color.White,
-                        modifier = Modifier.size(20.dp)
-                    )
-                }
-            },
+        if (searchText.isNotBlank()){
+            Icon(
+                modifier = Modifier
+                    .padding(start = 10.dp)
+                    .clickable { onClearSearchClick() }
+                    .size(30.dp),
+                imageVector = Icons.Default.ArrowBackIosNew,
+                contentDescription = "Back",
+                tint = Color.White
+            )
+        }
+
+        Box(
             modifier = modifier
                 .fillMaxWidth()
-                .clip(RoundedCornerShape(25.dp)),
-            colors = OutlinedTextFieldDefaults.colors(
-                focusedBorderColor = Color.Transparent,
-                unfocusedBorderColor = Color.Transparent,
-                focusedContainerColor = Color.White,
-                unfocusedContainerColor = Color.White
-            ),
-            shape = RoundedCornerShape(25.dp)
-        )
+                .padding(start = if (searchText.isNotBlank()) 10.dp else 20.dp, end = 20.dp)
+        ) {
+            OutlinedTextField(
+                value = searchText,
+                onValueChange = onSearchTextChange,
+                placeholder = {
+                    Text(
+                        text = "Enter the receipt number ...",
+                        color = Color.Gray
+                    )
+                },
+                leadingIcon = {
+                    Icon(
+                        imageVector = Icons.Default.Search,
+                        contentDescription = "Search",
+                        tint = Color.Gray
+                    )
+                },
+                trailingIcon = {
+                    Box(
+                        modifier = modifier
+                            .size(40.dp)
+                            .clip(CircleShape)
+                            .background(Color(0xFFFF8A65)),
+                        contentAlignment = Alignment.Center
+                    ) {
+                        Icon(
+                            imageVector = Icons.Default.FilterList,
+                            contentDescription = "Filter",
+                            tint = Color.White,
+                            modifier = Modifier.size(20.dp)
+                        )
+                    }
+                },
+                modifier = modifier
+                    .fillMaxWidth()
+                    .clip(RoundedCornerShape(25.dp)),
+                colors = OutlinedTextFieldDefaults.colors(
+                    focusedBorderColor = Color.Transparent,
+                    unfocusedBorderColor = Color.Transparent,
+                    focusedContainerColor = Color.White,
+                    unfocusedContainerColor = Color.White
+                ),
+                shape = RoundedCornerShape(25.dp)
+            )
+        }
     }
 }
 
+@Composable
+fun ShipmentSearchItem(shipment: ShipmentSearch) {
+    Row(
+        modifier = Modifier
+            .fillMaxWidth()
+            .padding(vertical = 20.dp),
+        verticalAlignment = Alignment.CenterVertically
+    ) {
+        Box(
+            modifier = Modifier
+                .size(40.dp)
+                .background(Color(0xFF6A1B9A), shape = CircleShape),
+            contentAlignment = Alignment.Center
+        ) {
+            Icon(
+                imageVector = Icons.Default.Inventory2,
+                contentDescription = "Package",
+                tint = Color.White,
+                modifier = Modifier.size(16.dp)
+            )
+        }
+        Spacer(modifier = Modifier.width(12.dp))
+
+        Column {
+            Text(text = shipment.title, fontWeight = FontWeight.SemiBold, fontSize = 18.sp)
+            Text(
+                text = "${shipment.trackingNumber} • ${shipment.from} → ${shipment.to}",
+                style = MaterialTheme.typography.bodySmall.copy(color = Color.Gray)
+            )
+        }
+    }
+}
 
 fun navigateToTan(navController: NavController, route: String) {
     navController.navigate(route) {

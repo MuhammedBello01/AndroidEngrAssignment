@@ -29,3 +29,10 @@ data class TabItemData(
     val title: String,
     val count: Int
 )
+
+data class ShipmentSearch(
+    val title: String,
+    val trackingNumber: String,
+    val from: String,
+    val to: String
+)

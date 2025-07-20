@@ -57,3 +57,12 @@ val sampleShipments = listOf(
     Shipment("NEJ20089934122231", ShipmentStatus.CanCelled, "$230", "Mar 20,2023"),
     Shipment("NEJ20089934122231", ShipmentStatus.CanCelled, "$230", "April 20,2023"),
 )
+
+val sampleShipmentsSearch = listOf(
+    ShipmentSearch("Macbook pro M2", "#NE43857340857904", "Paris", "Morocco"),
+    ShipmentSearch("Summer linen jacket", "#NEJ20089934122231", "Barcelona", "Paris"),
+    ShipmentSearch("Tapered-fit jeans AW", "#NEJ35870264978659", "Colombia", "Paris"),
+    ShipmentSearch("Slim fit jeans AW", "#NEJ35870264978659", "Bogota", "Dhaka"),
+    ShipmentSearch("Office setup desk", "#NEJ23481570754963", "France", "German")
+)
+

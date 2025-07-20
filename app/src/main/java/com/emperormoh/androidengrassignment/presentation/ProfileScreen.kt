@@ -23,7 +23,7 @@ import androidx.compose.ui.unit.sp
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun ProfileScreen( onBackClick: () -> Unit,){
+fun ProfileScreen( onBackClick: () -> Unit){
     Scaffold(
         topBar = {
             CenterAlignedTopAppBar(
