@@ -1,4 +1,4 @@
-package com.emperormoh.androidengrassignment.presentation
+package com.emperormoh.androidengrassignment.presentation.screens
 
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.animation.core.FastOutSlowInEasing
@@ -24,6 +24,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.emperormoh.androidengrassignment.models.Shipment
 
 @Composable
 fun AllShipmentsScreen(sampleShipments: List<Shipment>) {

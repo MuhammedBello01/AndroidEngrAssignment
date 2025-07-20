@@ -11,12 +11,12 @@ import androidx.compose.ui.Modifier
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
-import com.emperormoh.androidengrassignment.presentation.CalculateScreen
-import com.emperormoh.androidengrassignment.presentation.EstimateScreen
-import com.emperormoh.androidengrassignment.presentation.HomeScreen
-import com.emperormoh.androidengrassignment.presentation.ProfileScreen
+import com.emperormoh.androidengrassignment.presentation.screens.CalculateScreen
+import com.emperormoh.androidengrassignment.presentation.screens.EstimateScreen
+import com.emperormoh.androidengrassignment.presentation.screens.HomeScreen
+import com.emperormoh.androidengrassignment.presentation.screens.ProfileScreen
 import com.emperormoh.androidengrassignment.presentation.Route
-import com.emperormoh.androidengrassignment.presentation.ShipmentScreen
+import com.emperormoh.androidengrassignment.presentation.screens.ShipmentScreen
 import com.emperormoh.androidengrassignment.ui.theme.AndroidEngrAssignmentTheme
 
 class MainActivity : ComponentActivity() {

@@ -1,4 +1,4 @@
-package com.emperormoh.androidengrassignment.presentation
+package com.emperormoh.androidengrassignment.presentation.screens
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background

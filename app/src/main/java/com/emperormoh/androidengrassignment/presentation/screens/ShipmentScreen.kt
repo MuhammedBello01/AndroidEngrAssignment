@@ -1,4 +1,4 @@
-package com.emperormoh.androidengrassignment.presentation
+package com.emperormoh.androidengrassignment.presentation.screens
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
@@ -51,6 +51,10 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.emperormoh.androidengrassignment.R
+import com.emperormoh.androidengrassignment.models.Shipment
+import com.emperormoh.androidengrassignment.models.ShipmentStatus
+import com.emperormoh.androidengrassignment.models.TabItemData
+import com.emperormoh.androidengrassignment.presentation.sampleShipments
 import com.emperormoh.androidengrassignment.ui.theme.AndroidEngrAssignmentTheme
 
 @OptIn(ExperimentalMaterial3Api::class)

@@ -1,11 +1,10 @@
-package com.emperormoh.androidengrassignment.presentation
+package com.emperormoh.androidengrassignment.presentation.screens
 
 import androidx.compose.animation.core.Animatable
 import androidx.compose.animation.core.FastOutSlowInEasing
 import androidx.compose.animation.core.tween
 import androidx.compose.runtime.Composable
 import androidx.compose.foundation.background
-import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -20,7 +19,6 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.offset
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
-import androidx.compose.foundation.layout.sizeIn
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.layout.wrapContentHeight
 import androidx.compose.foundation.rememberScrollState
@@ -30,7 +28,6 @@ import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowBackIosNew
 import androidx.compose.material.icons.filled.ArrowDropDown
-import androidx.compose.material.icons.filled.Check
 import androidx.compose.material.icons.filled.FileDownload
 import androidx.compose.material.icons.filled.Scale
 import androidx.compose.material.icons.filled.UploadFile
@@ -58,6 +55,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.emperormoh.androidengrassignment.R
+import com.emperormoh.androidengrassignment.components.ClickableChip
 import com.emperormoh.androidengrassignment.ui.theme.AndroidEngrAssignmentTheme
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -262,59 +260,6 @@ fun CategoryChips() {
             )
             Spacer(Modifier.width(10.dp))
         }
-    }
-}
-
-@Composable
-fun ClickableChip(
-    modifier: Modifier = Modifier,
-    value: String,
-    isSelected: Boolean = false,
-    onClick: (String) -> Unit
-){
-    val backgroundColor = if (isSelected) Color.Black else Color.White
-    val borderColor = Color.Gray
-    val textColor = if (isSelected) Color.White else Color.Black
-
-    Box(
-        modifier = Modifier
-            .padding(vertical = 5.dp)
-            //.wrapContentSize()
-            .sizeIn(minWidth = 60.dp, minHeight = 40.dp)
-            .background(
-                color = backgroundColor,
-                shape = RoundedCornerShape(6.dp)
-            )
-            .border(
-                width = 1.dp,
-                shape = RoundedCornerShape(6.dp),
-                color = borderColor
-            )
-            .clickable { onClick(value) },
-        contentAlignment = Alignment.Center
-    ){
-        Row(
-            horizontalArrangement = Arrangement.Center,
-            verticalAlignment = Alignment.CenterVertically
-        ) {
-            if (isSelected){
-                Spacer(Modifier.width(10.dp))
-                Icon(
-                    modifier = modifier.size(18.dp),
-                    imageVector = Icons.Default.Check,
-                    contentDescription = "Dropdown",
-                    tint = Color.White
-                )
-            }
-            Text(
-                text = value,
-                modifier = modifier.padding(horizontal = 10.dp, vertical = 4.dp),
-                color = textColor,
-                fontSize = 14.sp,
-                fontWeight = FontWeight.Medium,
-            )
-        }
-
     }
 }
 
