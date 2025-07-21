@@ -81,7 +81,7 @@ fun TopHeader(
                             Text(
                                 text = "Your location",
                                 color = Color.White.copy(alpha = 0.8f),
-                                fontSize = 16.sp
+                                fontSize = 15.sp
                             )
                         }
 
@@ -91,7 +91,7 @@ fun TopHeader(
                             Text(
                                 text = "Wertheimer, Illinois",
                                 color = Color.White,
-                                fontSize = 20.sp,
+                                fontSize = 18.sp,
                                 fontWeight = FontWeight.Medium
                             )
                             Spacer(modifier = Modifier.width(4.dp))

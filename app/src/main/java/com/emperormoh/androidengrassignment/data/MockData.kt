@@ -1,4 +1,4 @@
-package com.emperormoh.androidengrassignment.presentation
+package com.emperormoh.androidengrassignment.data
 
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.DirectionsBoat

@@ -54,7 +54,7 @@ import com.emperormoh.androidengrassignment.R
 import com.emperormoh.androidengrassignment.models.Shipment
 import com.emperormoh.androidengrassignment.models.ShipmentStatus
 import com.emperormoh.androidengrassignment.models.TabItemData
-import com.emperormoh.androidengrassignment.presentation.sampleShipments
+import com.emperormoh.androidengrassignment.data.sampleShipments
 import com.emperormoh.androidengrassignment.ui.theme.AndroidEngrAssignmentTheme
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -157,7 +157,7 @@ fun TabItem(
             text = label,
             fontSize = 16.sp,
             fontWeight = if (!isSelected) FontWeight.Normal else FontWeight.Bold,
-            color = Color.White,
+            color =  if (isSelected) Color.White else Color.White.copy(alpha = 0.8f),
         )
         Spacer(modifier = Modifier.width(8.dp))
         if (count > 0){

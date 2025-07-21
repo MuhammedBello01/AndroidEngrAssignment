@@ -42,7 +42,7 @@ import com.emperormoh.androidengrassignment.components.TopHeader
 import com.emperormoh.androidengrassignment.components.TrackingSection
 import com.emperormoh.androidengrassignment.models.BottomNavItemData
 import com.emperormoh.androidengrassignment.presentation.Route
-import com.emperormoh.androidengrassignment.presentation.sampleShipmentsSearch
+import com.emperormoh.androidengrassignment.data.sampleShipmentsSearch
 import com.emperormoh.androidengrassignment.ui.theme.AndroidEngrAssignmentTheme
 
 @Composable
@@ -80,13 +80,14 @@ fun HomeScreen(navController: NavController){
                 .fillMaxSize()
                 .background(Color(0xFFF7F7F8))
         ){
-            // Top Header with gradient background
+            // Top Header
             TopHeader(
                 searchText = searchText,
                 onSearchTextChange = { searchText = it},
                 onClearSearchClick = { searchText = "" }
             )
 
+            // Main Content
             if (searchText.isNotBlank()){
                 Box(
                     modifier = Modifier
@@ -112,9 +113,7 @@ fun HomeScreen(navController: NavController){
                         }
                     }
                 }
-
             }else{
-                // Main Content
                 Column(
                     modifier = Modifier
                         .fillMaxSize()
@@ -132,6 +131,8 @@ fun HomeScreen(navController: NavController){
             }
 
         }
+
+        //Bottom Nav
         BottomNavigationBar(
             modifier = Modifier
                 .align(Alignment.BottomCenter),
@@ -167,14 +168,13 @@ fun HomeScreen(navController: NavController){
 
 fun navigateToTan(navController: NavController, route: String) {
     navController.navigate(route) {
-        // every time we navigate to tab we wanna pop the backstack until we reach the home screen
         navController.graph.startDestinationRoute?.let { homeScreen ->
             popUpTo(homeScreen) {
                 saveState = true
             }
             restoreState = true
             launchSingleTop =
-                true // if you clicked multiple time on home screen icon that won't create a new instance of home screen each time
+                true
         }
     }
 }

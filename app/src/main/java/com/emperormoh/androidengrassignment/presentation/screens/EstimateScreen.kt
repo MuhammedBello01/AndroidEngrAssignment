@@ -50,10 +50,8 @@ fun EstimateScreen(
             .background(Color.White)
             .padding(horizontal = 24.dp),
         horizontalAlignment = Alignment.CenterHorizontally,
-        verticalArrangement = Arrangement.SpaceEvenly
+        verticalArrangement = Arrangement.Center
     ) {
-        Spacer(modifier = Modifier.height(100.dp))
-
         Row(
             verticalAlignment = Alignment.CenterVertically,
             horizontalArrangement = Arrangement.Center
@@ -73,8 +71,8 @@ fun EstimateScreen(
                 modifier = Modifier.size(40.dp)
             )
         }
-        Spacer(modifier = Modifier.height(20.dp))
-        // Box image
+        Spacer(modifier = Modifier.height(30.dp))
+
         Image(
             painter = painterResource(id = R.drawable.ic_box),
             contentDescription = "Box",
@@ -82,17 +80,16 @@ fun EstimateScreen(
                 .size(150.dp)
         )
         Spacer(modifier = Modifier.height(20.dp))
-        // Title
+
         Text(
             text = "Total Estimated Amount",
             fontSize = 20.sp,
             fontWeight = FontWeight.SemiBold,
             color = Color.Black
         )
-
+        Spacer(modifier = Modifier.height(10.dp))
         FastCounter()
 
-        // Subtext
         Text(
             text = "This amount is estimated this will vary\nif you change your location or weight",
             fontSize = 14.sp,
@@ -100,8 +97,8 @@ fun EstimateScreen(
             textAlign = TextAlign.Center,
             modifier = Modifier.padding(top = 8.dp)
         )
+        Spacer(modifier = Modifier.height(20.dp))
 
-        // Orange button
         Button(
             onClick = onBackToHomeClick,
             modifier = Modifier
@@ -130,7 +127,7 @@ fun FastCounter() {
 
     LaunchedEffect(Unit) {
         while (count < 1460) {
-            delay(1) // Fast delay (1 millisecond)
+            delay(1)
             count++
         }
     }
