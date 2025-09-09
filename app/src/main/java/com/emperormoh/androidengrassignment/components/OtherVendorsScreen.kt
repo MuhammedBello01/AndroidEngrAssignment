@@ -118,14 +118,14 @@ fun OtherVendorsScreen(vendors: List<Vendor>) {
 fun VendorCard(vendor: Vendor) {
     Column(
         horizontalAlignment = Alignment.CenterHorizontally,
-        verticalArrangement = Arrangement.Top
+        //verticalArrangement = Arrangement.Center
     ) {
         Box(contentAlignment = Alignment.TopEnd) {
             Image(
                 painter = painterResource(id = vendor.logoRes),
                 contentDescription = null,
                 modifier = Modifier
-                    .size(64.dp)
+                    .size(50.dp)
                     .border(
                         width = 1.dp,
                         color = Color.LightGray,
@@ -150,7 +150,11 @@ fun VendorCard(vendor: Vendor) {
                                 bottomStart = 8.dp
                             )
                         )
-                        .padding(3.dp) // Space between white outer and blue inner
+                        //.padding(2.dp) // Space between white outer and blue inner
+                        .padding(
+                            start = 2.dp,
+                            bottom = 2.dp
+                        )
                 ) {
                     // INNER BLUE CONTAINER
                     Box(
@@ -168,7 +172,8 @@ fun VendorCard(vendor: Vendor) {
                     ) {
                         Text(
                             text = "${vendor.discountPercent}% off",
-                            fontSize = 10.sp,
+                            fontSize = 8.sp,
+                            lineHeight = 8.sp,
                             color = Color.Black,
                             textAlign = TextAlign.Center
                         )

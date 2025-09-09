@@ -1,5 +1,7 @@
 package com.emperormoh.androidengrassignment.presentation.screens
 
+import DatePickerDemoRy
+import android.util.Log
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
@@ -20,6 +22,12 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.emperormoh.androidengrassignment.components.CustomDatePickerBottomSheet
+import com.emperormoh.androidengrassignment.components.ExpandableText
+import com.emperormoh.androidengrassignment.components.ExpandableText2
+import com.emperormoh.androidengrassignment.components.PreviewCustomDatePickerBottomSheet
+import java.time.LocalDate
+import java.time.format.DateTimeFormatter
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -50,10 +58,27 @@ fun ProfileScreen( onBackClick: () -> Unit){
         }
     ){ paddingValues ->
         Box(
-            modifier = Modifier.fillMaxSize().padding(paddingValues),
+            modifier = Modifier.fillMaxSize().padding(paddingValues).padding(16.dp),
             contentAlignment = Alignment.Center
         ){
-            Text("Profile Screen", fontWeight = FontWeight.Bold, fontSize = 20.sp)
+            //Text("Profile Screen", fontWeight = FontWeight.Bold, fontSize = 20.sp)
+//            ExpandableText2(
+//                text = "This is a very long message that should show see more if it is more than 50 characters, and collapse back when see less is clicked. " +
+//                        "jdshfdhkjhdwkshjsdjfhkjhsalkjhjkksa kjdshfjkdshjkhdsjghjksdahflkadsj jkfhwjdkhgkjdshafkjlhasdjkfhkjhfjsdjhfsdjkhfjksdhkjflds"
+//            )
+
+            //PreviewCustomDatePickerBottomSheet()
+//            CustomDatePickerBottomSheet(
+//                initialDate = LocalDate.of(2025, 4, 25), // Example selected date
+//                onDismiss = { /* preview dismiss */ },
+//                onConfirm = { selectedDate ->
+//                    println("Selected date: $selectedDate") // Logs in preview
+//                }
+//            )
+
+            DatePickerDemoRy()
+
+
         }
     }
 
