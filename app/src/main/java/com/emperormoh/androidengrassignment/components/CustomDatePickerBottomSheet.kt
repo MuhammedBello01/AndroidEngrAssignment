@@ -41,18 +41,19 @@ fun CustomDatePickerBottomSheet2(
 
     ModalBottomSheet(
         onDismissRequest = onDismiss,
-        shape = RoundedCornerShape(topStart = 24.dp, topEnd = 24.dp)
+        shape = RoundedCornerShape(topStart = 24.dp, topEnd = 24.dp),
+        dragHandle = {}
     ) {
         Column(
             modifier = modifier
                 .fillMaxWidth()
-                .padding(bottom = 16.dp)
+                .padding(bottom = 16.dp, top = 16.dp)
         ) {
             // ==== HEADER ====
             Row(
                 modifier = Modifier
-                    .fillMaxWidth().size(25.dp)
-                    .padding(10.dp),
+                    .fillMaxWidth()
+                    .padding(horizontal = 10.dp, vertical = 8.dp),
                 horizontalArrangement = Arrangement.SpaceBetween,
                 verticalAlignment = Alignment.CenterVertically
             ) {

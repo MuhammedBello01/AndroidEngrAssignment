@@ -22,12 +22,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.emperormoh.androidengrassignment.components.CustomDatePickerBottomSheet
-import com.emperormoh.androidengrassignment.components.ExpandableText
-import com.emperormoh.androidengrassignment.components.ExpandableText2
-import com.emperormoh.androidengrassignment.components.PreviewCustomDatePickerBottomSheet
-import java.time.LocalDate
-import java.time.format.DateTimeFormatter
+
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -67,14 +62,7 @@ fun ProfileScreen( onBackClick: () -> Unit){
 //                        "jdshfdhkjhdwkshjsdjfhkjhsalkjhjkksa kjdshfjkdshjkhdsjghjksdahflkadsj jkfhwjdkhgkjdshafkjlhasdjkfhkjhfjsdjhfsdjkhfjksdhkjflds"
 //            )
 
-            //PreviewCustomDatePickerBottomSheet()
-//            CustomDatePickerBottomSheet(
-//                initialDate = LocalDate.of(2025, 4, 25), // Example selected date
-//                onDismiss = { /* preview dismiss */ },
-//                onConfirm = { selectedDate ->
-//                    println("Selected date: $selectedDate") // Logs in preview
-//                }
-//            )
+
 
             DatePickerDemoRy()
 
